@@ -8,7 +8,6 @@ public class ServiceProxy implements Service {
     }
     @Override
     public void save() {
-        System.out.println("!!!!Transaction begin!!!!");
         try {
             service.save();
             System.out.println("@@@@@Commit@@@@");
