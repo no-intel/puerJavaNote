@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class ServiceProxy implements InvocationHandler {
+public class ServiceProxy implements InvocationHandler{
     private Service service;
 
     public ServiceProxy() {

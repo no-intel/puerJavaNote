@@ -2,7 +2,7 @@ package proxy.dynamic;
 
 import java.util.Random;
 
-public class ServiceImpl implements Service{
+public class ServiceImpl implements Service {
     @Override
     public void select() {
         System.out.println("None-Transactional SELECT");
