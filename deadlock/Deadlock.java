@@ -1,6 +1,6 @@
 package deadlock;
 
-public class Deadlock {
+public class Deadlock{
     private static final Object LOCK_1 = new Object();
     private static final Object LOCK_2 = new Object();
 

@@ -1,7 +1,7 @@
 package deadlock;
 
 // 순환 대기를 배제
-public class Solution2 {
+public class Solution2{
     private static final Object LOCK_1 = new Object();
     private static final Object LOCK_2 = new Object();
 

@@ -1,7 +1,7 @@
 package deadlock;
 
 // 점유와 대기조건을 배제
-public class Solution1 {
+public class Solution1{
     private static final Object LOCK_1 = new Object();
     private static final Object LOCK_2 = new Object();
 
