@@ -1,6 +1,6 @@
 package deadlock;
 
-public class Deadlock{
+public class Deadlock {
     private static final Object LOCK_1 = new Object();
     private static final Object LOCK_2 = new Object();
 
@@ -36,7 +36,7 @@ public class Deadlock{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            synchronized (LOCK_1){
+            synchronized (LOCK_1) {
                 System.out.println("3번 쓰레드 : Acquired LOCK 1");
             }
         });
