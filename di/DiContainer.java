@@ -23,7 +23,7 @@ public class DiContainer {
             Component annotation = clazz.getAnnotation(Component.class);
             if (annotation != null){
                 System.out.println(clazz.getSimpleName());
-                beanContainer.put(clazz.getSimpleName(), doInstance(clazz));
+                beanContainer.put(clazz.getInterfaces()[0].getSimpleName(), doInstance(clazz));
             }
         }
     }
@@ -35,16 +35,9 @@ public class DiContainer {
             Object newInstance = constructor.newInstance();
             constructor.setAccessible(false);
             return newInstance;
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private Set<Class<?>> findAllClasses(String packageName) {
