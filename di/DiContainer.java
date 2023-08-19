@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -22,8 +23,13 @@ public class DiContainer {
         for (var clazz : allClasses) {
             Component annotation = clazz.getAnnotation(Component.class);
             if (annotation != null){
-                System.out.println(clazz.getSimpleName());
-                beanContainer.put(clazz.getInterfaces()[0].getSimpleName(), doInstance(clazz));
+                Class<?> clazzInterface = clazz.getInterfaces()[0];
+                Object proxy = Proxy.newProxyInstance(
+                        clazz.getClassLoader(),
+                        new Class[]{clazzInterface},
+                        new ProxyHandler(doInstance(clazz))
+                );
+                beanContainer.put(clazzInterface.getSimpleName(), proxy);
             }
         }
     }

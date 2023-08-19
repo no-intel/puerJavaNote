@@ -5,12 +5,8 @@ public class Machine {
         String packageName = Machine.class.getPackageName();
         DiContainer diContainer = new DiContainer();
         diContainer.makeBean(packageName);
-        diContainer.printBean();
 
-        Client client = new Client((Dao) diContainer.diBean(Dao.class));
+        Client client = new Client((Dao) diContainer.diBean(Dao.class), (Service) diContainer.diBean(Service.class));
         client.doSomething();
-
-        Object o = diContainer.diBean(Dao.class);
-        System.out.println(o);
     }
 }
