@@ -9,8 +9,12 @@ public class Serialization {
                 "\"weight\": \"129.3\""+
                 "}";
         Converter converter = new Converter();
+        //Deserialize
         Emong emong = converter.jsonToObject(Emong.class, json);
-
         System.out.println(emong.toString());
+
+        //Serialize
+        String toJson = converter.objectToJson(emong);
+        System.out.println(toJson);
     }
 }

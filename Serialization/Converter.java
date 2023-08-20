@@ -1,6 +1,7 @@
 package Serialization;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -58,5 +59,26 @@ public class Converter {
         }
         method.invoke(instance, parameterType.cast(value));
 
+    }
+
+    public String objectToJson(Object object){
+        Class<?> clazz = object.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        StringJoiner joiner = new StringJoiner(",", "{", "}");
+        for (var field : fields) {
+            String name = field.getName();
+            try {
+                Method method = clazz.getMethod("get" + name.substring(0, 1).toUpperCase() + name.substring(1));
+                String value = method.invoke(object).toString();
+
+                joiner.add("\"" + name + "\"" + ":" + "\"" + value + "\"");
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException("메서드 불러오기 실패 : " + e.getMessage());
+            } catch (InvocationTargetException | IllegalAccessException e) {
+                throw new RuntimeException("메서드 실행 실패 : " + e);
+            }
+        }
+
+        return joiner.toString();
     }
 }
