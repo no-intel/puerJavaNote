@@ -18,20 +18,24 @@ public class HttpServer {
 
     private void server() throws IOException {
         ServerSocket serverSocket = new ServerSocket(8083);
-        Socket socket = serverSocket.accept();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintStream out = new PrintStream(socket.getOutputStream());
 
-        out.println("Well Come 8083!");
-        out.println("This is Server");
-        out.println("Have a good Time");
+        while (true){
+            Socket socket = serverSocket.accept();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintStream out = new PrintStream(socket.getOutputStream());
 
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
+            out.println("Well Come 8083!");
+            out.println("This is Server");
+            out.println("Have a good Time");
+
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            reader.close();
+            out.close();
+            socket.close();
         }
-        reader.close();
-        out.close();
-        socket.close();
     }
 }
